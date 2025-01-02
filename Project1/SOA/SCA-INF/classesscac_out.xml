@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke1']</loc>
+      <line>64</line>
+      <col/>
+      <file>BPEL/File_List.bpel</file>
+      <name>BPEL/File_List.bpel</name>
+      <fix>Make sure that the attribute "partnerLink" is specified.</fix>
+      <msg>Attribute "partnerLink" is not set on this &lt;bpel:invoke> activity.</msg>
+   </Fault>
+</Faults>

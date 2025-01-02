@@ -1,0 +1,68 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Dec 09 11:00:44 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="FileAdapterBPELProcess"
+               targetNamespace="http://xmlns.oracle.com/SOA_Training/FileAdapterPractice/FileAdapterBPELProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOA_Training/FileAdapterPractice/FileAdapterBPELProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FileAdapterPractice/fileReference">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/SOA_Training/FileAdapterPractice/FileAdapterBPELProcess" location="../WSDLs/FileAdapterBPELProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="fileadapterbpelprocess_client" partnerLinkType="client:FileAdapterBPELProcess" myRole="FileAdapterBPELProcessProvider"/>
+    <partnerLink name="fileReference" partnerLinkType="ns1:Read_plt" myRole="Read_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:FileAdapterBPELProcessRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:FileAdapterBPELProcessResponseMessage"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in FileAdapterBPELProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="fileadapterbpelprocess_client" portType="client:FileAdapterBPELProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+    <invoke name="Invoke1"/>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="fileadapterbpelprocess_client" portType="client:FileAdapterBPELProcess" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

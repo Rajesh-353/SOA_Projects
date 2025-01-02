@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process xmlns="http://xmlns.oracle.com/SOA_Training/DB_adopter_Insert1/Insert_BPELProcess1">
+   <EmployeeCollection>
+      <employee>
+         <emp_Id>40</emp_Id>
+         <emp_Name>emp_Name41</emp_Name>
+         <emp_Salary>42</emp_Salary>
+      </employee>
+      <employee>
+         <emp_Id>43</emp_Id>
+         <emp_Name>emp_Name44</emp_Name>
+         <emp_Salary>45</emp_Salary>
+      </employee>
+      <employee>
+         <emp_Id>46</emp_Id>
+         <emp_Name>emp_Name47</emp_Name>
+         <emp_Salary>48</emp_Salary>
+      </employee>
+   </EmployeeCollection>
+</process>

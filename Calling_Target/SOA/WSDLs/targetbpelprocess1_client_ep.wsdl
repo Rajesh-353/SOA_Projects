@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="TargetBPELProcess1"
+     targetNamespace="http://xmlns.oracle.com/SOA_Training/TargetService/TargetBPELProcess1"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/SOA_Training/TargetService/TargetBPELProcess1"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://DESKTOP-FC5I9EP:7101/soa-infra/services/default/TargetService!1.2/WSDLs/TargetBPELProcess1.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="TargetBPELProcess1">
+        <plnk:role name="TargetBPELProcess1Provider" portType="client:TargetBPELProcess1"/>
+    </plnk:partnerLinkType>
+    <wsp:Policy xmlns="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+         xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+         wsu:Id="wss_username_token_service_policy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <sp:SupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+            <wsp:Policy>
+                <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                    <wsp:Policy>
+                        <sp:WssUsernameToken10/>
+                    </wsp:Policy>
+                </sp:UsernameToken>
+            </wsp:Policy>
+        </sp:SupportingTokens>
+    </wsp:Policy>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/SOA_Training/TargetService/TargetBPELProcess1"
+                 schemaLocation="../Schemas/TargetBPELProcess1.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="TargetBPELProcess1RequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="TargetBPELProcess1ResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="TargetBPELProcess1">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:TargetBPELProcess1RequestMessage"/>
+            <wsdl:output message="client:TargetBPELProcess1ResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="TargetBPELProcess1Binding" type="client:TargetBPELProcess1">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#wss_username_token_service_policy"
+             wsdl:required="false"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="targetbpelprocess1_client_ep">
+        <wsdl:port name="TargetBPELProcess1_pt" binding="client:TargetBPELProcess1Binding">
+            <soap:address location="http://DESKTOP-FC5I9EP:7101/soa-infra/services/default/TargetService/targetbpelprocess1_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

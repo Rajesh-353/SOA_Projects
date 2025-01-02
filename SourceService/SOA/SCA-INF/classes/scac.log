@@ -1,0 +1,26 @@
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2024-11-28 12:30:38.640/1.386 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Loaded operational configuration from "jar:file:/C:/Oracle/Middleware/Oracle_Home/coherence/lib/coherence.jar!/tangosol-coherence.xml"
+2024-11-28 12:30:38.673/1.419 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Loaded operational overrides from "jar:file:/C:/Oracle/Middleware/Oracle_Home/coherence/lib/coherence.jar!/tangosol-coherence-override-dev.xml"
+2024-11-28 12:30:38.675/1.421 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "/tangosol-coherence-override.xml" is not specified
+2024-11-28 12:30:38.678/1.424 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "cache-factory-config.xml" is not specified
+2024-11-28 12:30:38.679/1.425 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "cache-factory-builder-config.xml" is not specified
+2024-11-28 12:30:38.681/1.427 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "/custom-mbeans.xml" is not specified
+
+Oracle Coherence Version 12.2.1.4.0 Build 74888
+ Grid Edition: Development mode
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+2024-11-28 12:30:39.256/2.003 Oracle Coherence GE 12.2.1.4.0 <Info> (thread=main, member=n/a): The cluster name has not been configured, a value of "Admin's cluster" has been automatically generated
+2024-11-28 12:30:39.593/2.339 Oracle Coherence GE 12.2.1.4.0 <Info> (thread=main, member=n/a): Created cache factory com.tangosol.net.ExtensibleConfigurableCacheFactory
+WARNING: Failed to load WSDL from http://DESKTOP-FC5I9EP:7101/soa-infra/services/default/TargetService!1.0/WSDLs/TargetBPELProcess1.wsdl due to: Error in getting XML input stream: http://DESKTOP-FC5I9EP:7101/soa-infra/services/default/TargetService!1.0/WSDLs/TargetBPELProcess1.wsdl: Server returned HTTP response code: 503 for URL: http://DESKTOP-FC5I9EP:7101/soa-infra/services/default/TargetService!1.0/WSDLs/TargetBPELProcess1.wsdlWill retry to load
+SEVERE:  failed to parse wsdl from http://DESKTOP-FC5I9EP:7101/soa-infra/services/default/TargetService!1.0/WSDLs/TargetBPELProcess1.wsdl : 
+
+WARNING: Validating WSDLs from WSDLManager....  with option UseSoaInfraMds:false
+INFO: XMLSchema incremental build enabled.
+WARNING: Failed to load WSDL from http://DESKTOP-FC5I9EP:7101/soa-infra/services/default/TargetService!1.0/WSDLs/TargetBPELProcess1.wsdl due to: Error in getting XML input stream: http://DESKTOP-FC5I9EP:7101/soa-infra/services/default/TargetService!1.0/WSDLs/TargetBPELProcess1.wsdl: Server returned HTTP response code: 503 for URL: http://DESKTOP-FC5I9EP:7101/soa-infra/services/default/TargetService!1.0/WSDLs/TargetBPELProcess1.wsdlWill retry to load
+SEVERE:  failed to parse wsdl from http://DESKTOP-FC5I9EP:7101/soa-infra/services/default/TargetService!1.0/WSDLs/TargetBPELProcess1.wsdl : 
+
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option PermSize=32m; support was removed in 8.0
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0

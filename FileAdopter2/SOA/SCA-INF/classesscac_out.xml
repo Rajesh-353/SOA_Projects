@@ -1,0 +1,53 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='faultHandlers']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='catchAll']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign2']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy']</loc>
+      <line>65</line>
+      <col/>
+      <file>BPEL/FileHandling.bpel</file>
+      <name>BPEL/FileHandling.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "xsd:string" is not compatible with to-spec of "client:FileHandlingResponseMessage"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy']</loc>
+      <line>82</line>
+      <col/>
+      <file>BPEL/FileHandling.bpel</file>
+      <name>BPEL/FileHandling.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "xsd:string" is not compatible with to-spec of "ns4:Book"</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke1']</loc>
+      <line>90</line>
+      <col/>
+      <file>BPEL/FileHandling.bpel</file>
+      <name>BPEL/FileHandling.bpel</name>
+      <fix>Attribute "outputVariable" must be omitted from this &lt;bpel:invoke>.</fix>
+      <msg>There is no "wsdl:output" message that is used by this &lt;bpel:invoke> - attribute "outputVariable"  must be omitted.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke2']</loc>
+      <line>94</line>
+      <col/>
+      <file>BPEL/FileHandling.bpel</file>
+      <name>BPEL/FileHandling.bpel</name>
+      <fix>Check outputVariable "Invoke2_SynchRead_OutputVariable" declaration, check WSDL message "ns2:SynchRead_msg" declaration.</fix>
+      <msg>outputVariable "Invoke2_SynchRead_OutputVariable" of type "ns2:Empty_msg" is not compatible with WSDL message "ns2:SynchRead_msg".</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke3']</loc>
+      <line>98</line>
+      <col/>
+      <file>BPEL/FileHandling.bpel</file>
+      <name>BPEL/FileHandling.bpel</name>
+      <fix>Check outputVariable "Invoke3_FileListing_OutputVariable" declaration, check WSDL message "ns3:FileListing_msg" declaration.</fix>
+      <msg>outputVariable "Invoke3_FileListing_OutputVariable" of type "ns3:Empty_msg" is not compatible with WSDL message "ns3:FileListing_msg".</msg>
+   </Fault>
+</Faults>

@@ -1,0 +1,80 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Dec 11 14:55:23 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcess1"
+               targetNamespace="http://xmlns.oracle.com/SOA_Training/FileAdopterCombination/BPELProcess1"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOA_Training/FileAdopterCombination/BPELProcess1"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FileAdopterCombination/fileReference"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FileAdopterCombination/fileReference_2"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FileAdopterCombination/FileList">
+
+  <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/SOA_Training/FileAdopterCombination/BPELProcess1" location="../WSDLs/BPELProcess1.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="bpelprocess1_client" partnerLinkType="client:BPELProcess1" myRole="BPELProcess1Provider"/>
+    <partnerLink name="WriteFile" partnerLinkType="ns1:Write_plt" partnerRole="Write_role"/>
+    <partnerLink name="SyncronousRead" partnerLinkType="ns2:SynchRead_plt" partnerRole="SynchRead_role"/>
+    <partnerLink name="FileList" partnerLinkType="ns3:FileListing_plt" partnerRole="FileListing_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:BPELProcess1RequestMessage"/>
+    <variable name="Invoke1_Write_InputVariable" messageType="ns1:Write_msg"/>
+    <variable name="Invoke2_FileListing_InputVariable" messageType="ns3:Empty_msg"/>
+    <variable name="Invoke2_FileListing_OutputVariable" messageType="ns3:FileListing_msg"/>
+    <variable name="Invoke3_SynchRead_InputVariable" messageType="ns2:Empty_msg"/>
+    <variable name="Invoke3_SynchRead_OutputVariable" messageType="ns2:SynchRead_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELProcess1.wsdl) -->
+    <receive name="receiveInput" partnerLink="bpelprocess1_client" portType="client:BPELProcess1" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1"></assign>
+    <invoke name="Invoke1" partnerLink="WriteFile" portType="ns1:Write_ptt"
+            operation="Write" inputVariable="Invoke1_Write_InputVariable" bpelx:invokeAsDetail="no"/>
+    <invoke name="Invoke2" partnerLink="FileList" portType="ns3:FileListing_ptt"
+            operation="FileListing" inputVariable="Invoke2_FileListing_InputVariable"
+            outputVariable="Invoke2_FileListing_OutputVariable" bpelx:invokeAsDetail="no"/>
+    <invoke name="Invoke3" partnerLink="SyncronousRead" portType="ns2:SynchRead_ptt"
+            operation="SynchRead" inputVariable="Invoke3_SynchRead_InputVariable"
+            outputVariable="Invoke3_SynchRead_OutputVariable" bpelx:invokeAsDetail="no"/>
+  </sequence>
+</process>

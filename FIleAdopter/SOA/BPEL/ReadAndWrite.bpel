@@ -1,0 +1,82 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Nov 07 08:49:44 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ReadAndWrite"
+               targetNamespace="http://xmlns.oracle.com/SOA_Training/FIleAdopter/ReadAndWrite"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOA_Training/FIleAdopter/ReadAndWrite"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FIleAdopter/ReadFile"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FIleAdopter/WriteFile"
+         xmlns:ns3="http://TargetNamespace.com/fileReference">
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FIleAdopter/ReadFile"
+          location="../WSDLs/ReadFile.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="ReadFile" partnerLinkType="ns1:Read_plt" myRole="Read_role"/>
+    <partnerLink name="WriteFile" partnerLinkType="ns2:Write_plt" partnerRole="Write_role"/>
+  </partnerLinks>
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="Receive1_Read_InputVariable" messageType="ns1:Read_msg"/>
+    <variable name="Invoke1_Write_InputVariable_1" messageType="ns2:Write_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ReadAndWrite.wsdl) -->
+
+    <!-- Generate reply to synchronous request -->
+    <receive name="Receive1"
+             variable="Receive1_Read_InputVariable" createInstance="yes" partnerLink="ReadFile"
+             portType="ns1:Read_ptt" operation="Read"/>
+    <assign name="Assign1">
+      <copy>
+        <from>$Receive1_Read_InputVariable.body/ns3:BooksCollection/ns3:Title</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_Write_InputVariable_1.body/ns3:BooksCollection/ns3:Title</to>
+      </copy>
+      <copy>
+        <from>$Receive1_Read_InputVariable.body/ns3:BooksCollection/ns3:Author</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_Write_InputVariable_1.body/ns3:BooksCollection/ns3:Author</to>
+      </copy>
+      <copy>
+        <from>$Receive1_Read_InputVariable.body/ns3:BooksCollection/ns3:Price</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_Write_InputVariable_1.body/ns3:BooksCollection/ns3:Price</to>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" partnerLink="WriteFile" portType="ns2:Write_ptt"
+            operation="Write" inputVariable="Invoke1_Write_InputVariable_1" bpelx:invokeAsDetail="no"/>
+  </sequence>
+</process>

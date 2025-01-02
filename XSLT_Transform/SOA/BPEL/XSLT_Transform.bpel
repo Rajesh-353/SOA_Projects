@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Sat Nov 09 17:12:04 IST 2024
+  Author: Admin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="XSLT_Transform"
+         targetNamespace="http://xmlns.oracle.com/SOA_Training/XSLT_Transform/XSLT_Transform"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/SOA_Training/XSLT_Transform/XSLT_Transform"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/XSLT_Transform/ReadService"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/XSLT_Transform/WriteFile"
+         xmlns:ns3="http://TargetNamespace.com/fileReference"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/XSLT_Transform/fileService"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/XSLT_Transform/WriteService"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/XSLT_Transform/fileReference">
+  
+  <!-- PARTNERLINKS: Services participating in this BPEL process -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/XSLT_Transform/fileService"
+          location="../WSDLs/fileService.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="fileService" partnerLinkType="ns4:Read_plt" myRole="Read_role"/>
+    <partnerLink name="fileReference" partnerLinkType="ns6:Write_plt" partnerRole="Write_role"/>
+  </partnerLinks>
+  
+  <!-- VARIABLES: List of messages and XML documents used within this BPEL process -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="Receive1_Read_InputVariable_2" messageType="ns4:Read_msg"/>
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="Invoke1_Write_InputVariable_1" messageType="ns6:Write_msg"/>
+    <variable name="Receive1_Read_InputVariable" messageType="ns4:Read_msg"/>
+    <variable name="Invoke1_Write_InputVariable" messageType="ns6:Write_msg"/>
+  </variables>
+
+  <!-- ORCHESTRATION LOGIC: Activities coordinating the flow of messages -->
+  <sequence name="main">
+
+    <!-- Start Activity: Receive input from the requestor -->
+
+    <!-- Generate reply to synchronous request -->
+    <receive name="Receive1" createInstance="yes" partnerLink="fileService" portType="ns4:Read_ptt" operation="Read"
+             variable="Receive1_Read_InputVariable"/>
+    <assign name="Assign1">
+      <copy>
+        <from>$Receive1_Read_InputVariable.body/ns3:BooksCollection/ns3:Title</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_Write_InputVariable.body/ns3:BooksCollection/ns3:Title</to>
+      </copy>
+      <copy>
+        <from>$Receive1_Read_InputVariable.body/ns3:BooksCollection/ns3:Author</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_Write_InputVariable.body/ns3:BooksCollection/ns3:Author</to>
+      </copy>
+      <copy>
+        <from>$Receive1_Read_InputVariable.body/ns3:BooksCollection/ns3:Price</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_Write_InputVariable.body/ns3:BooksCollection/ns3:Price</to>
+      </copy>
+    </assign>
+    
+    <!-- Invoke Write Service -->
+    <invoke name="Invoke1" partnerLink="fileReference" portType="ns6:Write_ptt"
+            operation="Write" inputVariable="Invoke1_Write_InputVariable" bpelx:invokeAsDetail="no"/>
+    
+  </sequence>
+</process>

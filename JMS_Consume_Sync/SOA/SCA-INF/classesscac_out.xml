@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']</loc>
+      <line>20</line>
+      <col/>
+      <file>BPEL/Sync_BPELProcess1.bpel</file>
+      <name>BPEL/Sync_BPELProcess1.bpel</name>
+      <fix>A &lt;receive> or &lt;pick> with createInstance set to "true" must be present.</fix>
+      <msg>There is no start activity in process "Sync_BPELProcess1"</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='receive'][@name='Receive1']</loc>
+      <line>36</line>
+      <col/>
+      <file>BPEL/Sync_BPELProcess1.bpel</file>
+      <name>BPEL/Sync_BPELProcess1.bpel</name>
+      <fix>Make sure that the attribute "partnerLink" is specified.</fix>
+      <msg>Attribute "partnerLink" is not set on this &lt;bpel:receive> activity.</msg>
+   </Fault>
+</Faults>

@@ -1,0 +1,52 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Mon Dec 16 16:05:15 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcess1"
+               targetNamespace="http://xmlns.oracle.com/SOA_Training/JMS_Adopter_Consume/BPELProcess1"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOA_Training/JMS_Adopter_Consume/BPELProcess1"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/SOA_Training/JMS_Adopter_Consume/jmsService"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/JMS_Adopter_Consume/fileReference"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/opaque/" xmlns:ui="http://xmlns.oracle.com/soa/designer">
+
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/SOA_Training/JMS_Adopter_Consume/jmsService"
+          location="../WSDLs/jmsService.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="jmsService" partnerLinkType="ns1:Consume_Message_plt" myRole="Consume_Message_role"/>
+    <partnerLink name="fileReference" partnerLinkType="ns2:Write_plt" partnerRole="Write_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_Consume_Message_InputVariable" messageType="ns1:Consume_Message_msg"/>
+    <variable name="Invoke1_Write_InputVariable" messageType="ns2:Write_msg"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" createInstance="yes" partnerLink="jmsService" portType="ns1:Consume_Message_ptt"
+             operation="Consume_Message" variable="Receive1_Consume_Message_InputVariable"/>
+    <assign name="Assign1">
+      <copy>
+        <from>$Receive1_Consume_Message_InputVariable.opaque</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_Write_InputVariable.opaque</to>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" partnerLink="fileReference" portType="ns2:Write_ptt"
+            operation="Write" inputVariable="Invoke1_Write_InputVariable" bpelx:invokeAsDetail="no"/>
+  </sequence>
+</process>

@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/JDeveloper/mywork/SOA_Training/DB_Adopter_Insert/SOA/WSDLs/Insert_BPELProcess1.wsdl</file>
+      <name>/C:/JDeveloper/mywork/SOA_Training/DB_Adopter_Insert/SOA/WSDLs/Insert_BPELProcess1.wsdl</name>
+      <fix/>
+      <msg>Message part "payload" is undefined [element = {http://xmlns.oracle.com/SOA_Training/DB_Adopter_Insert/Insert_BPELProcess1}process</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/JDeveloper/mywork/SOA_Training/DB_Adopter_Insert/SOA/WSDLs/Insert_BPELProcess1.wsdl</file>
+      <name>/C:/JDeveloper/mywork/SOA_Training/DB_Adopter_Insert/SOA/WSDLs/Insert_BPELProcess1.wsdl</name>
+      <fix/>
+      <msg>Message part "payload" is undefined [element = {http://xmlns.oracle.com/SOA_Training/DB_Adopter_Insert/Insert_BPELProcess1}processResponse</msg>
+   </Fault>
+</Faults>

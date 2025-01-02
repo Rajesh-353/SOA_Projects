@@ -1,0 +1,106 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Nov 19 14:05:45 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="TargetDelete"
+               targetNamespace="http://xmlns.oracle.com/SOA_Training/DeleteFileTarget/TargetDelete"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOA_Training/DeleteFileTarget/TargetDelete"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/DeleteFileTarget/DeleteFile"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/SOA_Training/DeleteFileTarget/TargetDelete" location="../WSDLs/TargetDelete.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="targetdelete_client" partnerLinkType="client:TargetDelete" myRole="TargetDeleteProvider"/>
+    <partnerLink name="DeleteFile" partnerLinkType="ns1:SynchRead_plt" partnerRole="SynchRead_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:TargetDeleteRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:TargetDeleteResponseMessage"/>
+    <variable name="Invoke1_SynchRead_InputVariable" messageType="ns1:Empty_msg"/>
+    <variable name="Invoke1_SynchRead_OutputVariable" messageType="ns1:SynchRead_msg"/>
+    <variable name="TargetDir" type="xsd:string"/>
+    <variable name="SourceFileName" type="xsd:string"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in TargetDelete.wsdl) -->
+    <receive name="receiveInput" partnerLink="targetdelete_client" portType="client:TargetDelete" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from>$inputVariable.payload/client:input</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$TargetDir</to>
+      </copy>
+      <copy>
+        <from>$TargetDir</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_SynchRead_InputVariable.Empty</to>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" partnerLink="DeleteFile" portType="ns1:SynchRead_ptt"
+            operation="SynchRead" inputVariable="Invoke1_SynchRead_InputVariable"
+            outputVariable="Invoke1_SynchRead_OutputVariable" bpelx:invokeAsDetail="no">
+      <bpelx:toProperties>
+       <bpelx:toProperty name="jca.file.SourceFileName" variable="SourceFileName"/>
+        <bpelx:toProperty name="jca.file.TargetDirectory" variable="TargetDir"/>
+      </bpelx:toProperties>
+    </invoke>
+    <assign name="Assign2">
+      <copy>
+        <from>"File Deleted Successfully"</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:result</to>
+      </copy>
+    </assign>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="targetdelete_client" portType="client:TargetDelete" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

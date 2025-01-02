@@ -1,0 +1,86 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Nov 18 17:02:01 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="FTPRead"
+               targetNamespace="http://xmlns.oracle.com/SOA_Training/FTP_Adopter_Demo/FTPRead"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOA_Training/FTP_Adopter_Demo/FTPRead"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/ftp/SOA_Training/FTP_Adopter_Demo/ReadFile"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FTP_Adopter_Demo/WriteFile"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/ftp/SOA_Training/FTP_Adopter_Demo/SyncRead"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/ftp/SOA_Training/FTP_Adopter_Demo/ftpReference">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/SOA_Training/FTP_Adopter_Demo/FTPRead" location="../WSDLs/FTPRead.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="ftpread_client" partnerLinkType="client:FTPRead" myRole="FTPReadProvider"/>
+    <partnerLink name="WriteFile" partnerLinkType="ns3:Write_plt" partnerRole="Write_role"/>
+    <partnerLink name="ftpReference" partnerLinkType="ns5:SynchRead_plt" partnerRole="SynchRead_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:FTPReadRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:FTPReadResponseMessage"/>
+    <variable name="Invoke2_Write_InputVariable" messageType="ns3:Write_msg"/>
+    <variable name="Invoke1_SynchRead_InputVariable" messageType="ns5:Empty_msg"/>
+    <variable name="Invoke1_SynchRead_OutputVariable" messageType="ns5:SynchRead_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in FTPRead.wsdl) -->
+    <receive name="receiveInput" partnerLink="ftpread_client" portType="client:FTPRead" operation="process" variable="inputVariable" createInstance="yes"/>
+    <invoke name="Invoke1" partnerLink="ftpReference" portType="ns5:SynchRead_ptt"
+            operation="SynchRead" inputVariable="Invoke1_SynchRead_InputVariable"
+            outputVariable="Invoke1_SynchRead_OutputVariable" bpelx:invokeAsDetail="no"/>
+    <assign name="Assign2">
+      <copy>
+        <from>$Invoke1_SynchRead_OutputVariable.opaque</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke2_Write_InputVariable.opaque</to>
+      </copy>
+    </assign>
+    <invoke name="Invoke2" partnerLink="WriteFile" portType="ns3:Write_ptt"
+            operation="Write" inputVariable="Invoke2_Write_InputVariable" bpelx:invokeAsDetail="no"/>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="ftpread_client" portType="client:FTPRead" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<StudentCollection xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbReference">
+   <Student>
+      <stuId>1</stuId>
+      <stuName>string2</stuName>
+      <stuAge>4</stuAge>
+   </Student>
+   <Student>
+      <stuId>5</stuId>
+      <stuName>string6</stuName>
+      <stuAge>8</stuAge>
+   </Student>
+   <Student>
+      <stuId>9</stuId>
+      <stuName>string10</stuName>
+      <stuAge>12</stuAge>
+   </Student>
+</StudentCollection>

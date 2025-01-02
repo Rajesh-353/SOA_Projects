@@ -1,0 +1,32 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="FileReadBPELProcess"
+     targetNamespace="http://xmlns.oracle.com/SOA_Training/FileAdapteRead_Practice/FileReadBPELProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/SOA_Training/FileAdapteRead_Practice/FileReadBPELProcess"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+    >
+    <plnk:partnerLinkType name="FileReadBPELProcess">
+        <plnk:role name="FileReadBPELProcessProvider" portType="client:FileReadBPELProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/SOA_Training/FileAdapteRead_Practice/FileReadBPELProcess"
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype">
+            <import namespace="http://xmlns.oracle.com/SOA_Training/FileAdapteRead_Practice/FileReadBPELProcess"
+                 schemaLocation="../Schemas/FileReadBPELProcess.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="FileReadBPELProcessRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="FileReadBPELProcessResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="FileReadBPELProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:FileReadBPELProcessRequestMessage"/>
+            <wsdl:output message="client:FileReadBPELProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

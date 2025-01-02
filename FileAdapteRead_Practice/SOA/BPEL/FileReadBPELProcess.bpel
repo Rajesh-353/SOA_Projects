@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+
+  Created: Mon Dec 09 11:20:03 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="FileReadBPELProcess"
+         targetNamespace="http://xmlns.oracle.com/SOA_Training/FileAdapteRead_Practice/FileReadBPELProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/SOA_Training/FileAdapteRead_Practice/FileReadBPELProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FileAdapteRead_Practice/fileService"
+         xmlns:ns2="http://TargetNamespace.com/fileService"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FileAdapteRead_Practice/fileReference"
+         xmlns:ns4="http://TargetNamespace.com/fileReference">
+
+  <!-- Partner Links -->
+  <import namespace="http://xmlns.oracle.com/SOA_Training/FileAdapteRead_Practice/FileReadBPELProcess"
+          location="../WSDLs/FileReadBPELProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+          ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="filereadbpelprocess_client_ep" partnerLinkType="client:FileReadBPELProcess"
+                 myRole="FileReadBPELProcessProvider"/>
+    <partnerLink name="fileReference" partnerLinkType="ns3:Read_plt" myRole="Read_role"/>
+  </partnerLinks>
+
+  <!-- Variables -->
+  <variables>
+    <variable name="outputVariable" messageType="client:FileReadBPELProcessResponseMessage"/>
+    <variable name="inputVariable" messageType="client:FileReadBPELProcessRequestMessage"/>
+    <variable name="Receive2_Read_InputVariable" messageType="ns3:Read_msg"/>
+  </variables>
+
+  <!-- Orchestration Logic -->
+  <sequence name="main">
+
+    <!-- Start Activity: Receive input from requestor (this is the first receive) -->
+    <receive name="Receive1"
+             variable="inputVariable" partnerLink="filereadbpelprocess_client_ep"
+             portType="client:FileReadBPELProcess" operation="process"/>
+
+    <!-- Receive data from fileReference partner (second receive) -->
+    <receive name="Receive2" partnerLink="fileReference" portType="ns3:Read_ptt" operation="Read"
+             variable="Receive2_Read_InputVariable"/>
+
+    <!-- Assign values from Receive2 to output variable -->
+    <assign name="Assign1">
+      <copy>
+        <from>$Receive2_Read_InputVariable.body/ns4:book/ns4:bookId</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:id</to>
+      </copy>
+      <copy>
+        <from>$Receive2_Read_InputVariable.body/ns4:book/ns4:bookName</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:name</to>
+      </copy>
+      <copy>
+        <from>$Receive2_Read_InputVariable.body/ns4:book/ns4:bookPrice</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:salary</to>
+      </copy>
+    </assign>
+
+    <!-- Send reply back to client -->
+    <reply name="Reply1" variable="outputVariable" partnerLink="filereadbpelprocess_client_ep"
+           portType="client:FileReadBPELProcess" operation="process"/>
+
+  </sequence>
+
+</process>

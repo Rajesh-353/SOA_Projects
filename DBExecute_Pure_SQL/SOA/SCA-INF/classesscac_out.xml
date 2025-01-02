@@ -1,0 +1,123 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/JDeveloper/mywork/SOA_Training/DBExecute_Pure_SQL/SOA/WSDLs/dbReference.wsdl</file>
+      <name>/C:/JDeveloper/mywork/SOA_Training/DBExecute_Pure_SQL/SOA/WSDLs/dbReference.wsdl</name>
+      <fix/>
+      <msg>oracle.xml.parser.schema.XSDException: Invalid reference: 'http://xmlns.oracle.com/pcbpel/adapter/db/dbReference:' [Cause=Invalid reference: 'http://xmlns.oracle.com/pcbpel/adapter/db/dbReference:']</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/JDeveloper/mywork/SOA_Training/DBExecute_Pure_SQL/SOA/WSDLs/dbReference.wsdl</file>
+      <name>/C:/JDeveloper/mywork/SOA_Training/DBExecute_Pure_SQL/SOA/WSDLs/dbReference.wsdl</name>
+      <fix/>
+      <msg>Message part "dbReferenceInput_msg" is undefined [element = {http://xmlns.oracle.com/pcbpel/adapter/db/dbReference}dbReferenceInput</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/JDeveloper/mywork/SOA_Training/DBExecute_Pure_SQL/SOA/WSDLs/dbReference.wsdl</file>
+      <name>/C:/JDeveloper/mywork/SOA_Training/DBExecute_Pure_SQL/SOA/WSDLs/dbReference.wsdl</name>
+      <fix/>
+      <msg>oracle.xml.parser.schema.XSDException: Invalid reference: 'http://xmlns.oracle.com/pcbpel/adapter/db/dbReference:' [Cause=Invalid reference: 'http://xmlns.oracle.com/pcbpel/adapter/db/dbReference:']</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/JDeveloper/mywork/SOA_Training/DBExecute_Pure_SQL/SOA/WSDLs/dbReference.wsdl</file>
+      <name>/C:/JDeveloper/mywork/SOA_Training/DBExecute_Pure_SQL/SOA/WSDLs/dbReference.wsdl</name>
+      <fix/>
+      <msg>Message part "dbReferenceOutputCollection" is undefined [element = {http://xmlns.oracle.com/pcbpel/adapter/db/dbReference}dbReferenceOutputCollection</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']</loc>
+      <line>22</line>
+      <col/>
+      <file>BPEL/BPELProcess1.bpel</file>
+      <name>BPEL/BPELProcess1.bpel</name>
+      <fix>Please check import location or element QNames.</fix>
+      <msg>oracle.xml.parser.schema.XSDException: Invalid reference: 'http://xmlns.oracle.com/pcbpel/adapter/db/dbReference:' [Cause=Invalid reference: 'http://xmlns.oracle.com/pcbpel/adapter/db/dbReference:']</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign2']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='to']</loc>
+      <line>70</line>
+      <col/>
+      <file>BPEL/BPELProcess1.bpel</file>
+      <name>BPEL/BPELProcess1.bpel</name>
+      <fix/>
+      <msg>Variable "Invoke1_dbReference_InputVariable" does not have a part named "dbReferenceInput_msg" - check expression segment "$Invoke1_dbReference_InputVariable.dbReferenceInput_msg"</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign2']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='to']</loc>
+      <line>70</line>
+      <col/>
+      <file>BPEL/BPELProcess1.bpel</file>
+      <name>BPEL/BPELProcess1.bpel</name>
+      <fix>Check the type definition associated with the BPEL variable.</fix>
+      <msg>The XPath segment "child::ns2:Processed" cannot be resolved.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke1']</loc>
+      <line>74</line>
+      <col/>
+      <file>BPEL/BPELProcess1.bpel</file>
+      <name>BPEL/BPELProcess1.bpel</name>
+      <fix>Make sure that the attribute "outputVariable" is specified.</fix>
+      <msg>Attribute "outputVariable" is not set on this &lt;bpel:invoke> activity.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='from']</loc>
+      <line>77</line>
+      <col/>
+      <file>BPEL/BPELProcess1.bpel</file>
+      <name>BPEL/BPELProcess1.bpel</name>
+      <fix/>
+      <msg>Variable "Invoke1_dbReference_InputVariable" does not have a part named "dbReferenceInput_msg" - check expression segment "$Invoke1_dbReference_InputVariable.dbReferenceInput_msg"</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='from']</loc>
+      <line>77</line>
+      <col/>
+      <file>BPEL/BPELProcess1.bpel</file>
+      <name>BPEL/BPELProcess1.bpel</name>
+      <fix>Check the type definition associated with the BPEL variable.</fix>
+      <msg>The XPath segment "child::ns2:Processed" cannot be resolved.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='to']</loc>
+      <line>78</line>
+      <col/>
+      <file>BPEL/BPELProcess1.bpel</file>
+      <name>BPEL/BPELProcess1.bpel</name>
+      <fix/>
+      <msg>Variable "outputVariable" does not have a part named "payload" - check expression segment "$outputVariable.payload"</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='to']</loc>
+      <line>78</line>
+      <col/>
+      <file>BPEL/BPELProcess1.bpel</file>
+      <name>BPEL/BPELProcess1.bpel</name>
+      <fix>Check the type definition associated with the BPEL variable.</fix>
+      <msg>The XPath segment "child::client:result" cannot be resolved.</msg>
+   </Fault>
+</Faults>

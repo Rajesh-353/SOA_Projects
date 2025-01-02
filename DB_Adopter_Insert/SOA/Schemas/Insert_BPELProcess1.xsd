@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<schema attributeFormDefault="unqualified"
+        elementFormDefault="qualified"
+        targetNamespace="http://xmlns.oracle.com/SOA_Training/DB_Adopter_Insert/Insert_BPELProcess1"
+        xmlns="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Root element for the student input -->
+    <element name="process">
+        <complexType>
+            <sequence>
+                <element name="StudentCollection">
+                    <complexType>
+                        <sequence>
+                            <element name="student" maxOccurs="unbounded">
+                                <complexType>
+                                    <sequence>
+                                        <!-- Student's ID -->
+                                        <element name="stuId" type="int"/>
+                                        <!-- Student's Name -->
+                                        <element name="stuName" type="string"/>
+                                        <!-- Student's Age -->
+                                        <element name="stuAge" type="int"/>
+                                    </sequence>
+                                </complexType>
+                            </element>
+                        </sequence>
+                    </complexType>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+
+    <!-- Response element after processing the student data -->
+    <element name="processResponse">
+        <complexType>
+            <sequence>
+                <element name="StudentCollection">
+                    <complexType>
+                        <sequence>
+                            <element name="student" maxOccurs="unbounded">
+                                <complexType>
+                                    <sequence>
+                                        <element name="stuId" type="int"/>
+                                        <element name="stuName" type="string"/>
+                                        <element name="stuAge" type="int"/>
+                                    </sequence>
+                                </complexType>
+                            </element>
+                        </sequence>
+                    </complexType>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+
+</schema>

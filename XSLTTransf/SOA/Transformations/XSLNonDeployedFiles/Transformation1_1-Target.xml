@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:BooksList xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" 
+               xmlns:pc="http://xmlns.oracle.com/pcbpel/" 
+               xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+               xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/XSLTTransf/ReadService" 
+               xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" 
+               xmlns:ns0="http://TargetNamespace.com/fileReference">
+    
+    <!-- First Book Entry -->
+    <ns0:Books>
+        <ns0:BooksCollection>
+            <ns0:Title>Title1</ns0:Title>
+            <ns0:Author>Author2</ns0:Author>
+            <ns0:Price>Price3</ns0:Price>
+        </ns0:BooksCollection>
+    </ns0:Books>
+    
+    <!-- Second Book Entry -->
+    <ns0:Books>
+        <ns0:BooksCollection>
+            <ns0:Title>Title4</ns0:Title>
+            <ns0:Author>Author5</ns0:Author>
+            <ns0:Price>Price6</ns0:Price>
+        </ns0:BooksCollection>
+    </ns0:Books>
+    
+    <!-- Third Book Entry -->
+    <ns0:Books>
+        <ns0:BooksCollection>
+            <ns0:Title>Title7</ns0:Title>
+            <ns0:Author>Author8</ns0:Author>
+            <ns0:Price>Price9</ns0:Price>
+        </ns0:BooksCollection>
+    </ns0:Books>
+
+</ns0:BooksList>

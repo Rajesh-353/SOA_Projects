@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgm:gDiagram xmlns:dgm="http://xmlns.oracle.com/sca/soadgm">
+    <dgm:gService name="standalonebpelprocess_client_ep">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="41" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="34" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="standalonebpelprocess_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/SOA_Training/StandAloneSubProcess/StandAloneBPELProcess#wsdl.interface(StandAloneBPELProcess)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gComponent name="StandAloneBPELProcess">
+        <dgm:body borderWidth="2" arcRad="20" X="348" Y="26" width="130" height="61">
+            <dgm:borderColor r="69" g="113" b="140"/>
+            <dgm:lightBgColor r="166" g="208" b="230"/>
+            <dgm:darkBgColor r="99" g="162" b="201"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="338" Y="19" width="150" height="77">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="standalonebpelprocess_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/SOA_Training/StandAloneSubProcess/StandAloneBPELProcess#wsdl.interface(StandAloneBPELProcess)"/>
+        <dgm:outputPort name="StandaloneSubprocess" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gComponent name="StandaloneSubprocess">
+        <dgm:body borderWidth="2" arcRad="20" X="668" Y="26" width="130" height="61">
+            <dgm:borderColor r="141" g="141" b="141"/>
+            <dgm:lightBgColor r="255" g="255" b="255"/>
+            <dgm:darkBgColor r="202" g="202" b="202"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="658" Y="19" width="150" height="77">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="StandaloneSubprocess" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/v2/plugins/resources/images/application/scaconfig/subprocess_20x20.png" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gWireLink source="standalonebpelprocess_client_ep" target="StandAloneBPELProcess/standalonebpelprocess_client" width="2">
+        <dgm:gSegment X1="168" Y1="51" X2="338" Y2="51"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="StandAloneBPELProcess/StandaloneSubprocess" target="StandaloneSubprocess/StandaloneSubprocess" width="2">
+        <dgm:gSegment X1="488" Y1="51" X2="658" Y2="51"/>
+        <dgm:baseColor r="183" g="183" b="183"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+</dgm:gDiagram>

@@ -1,0 +1,37 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Thu Nov 21 12:46:56 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="Sync_BPELProcess1"
+               targetNamespace="http://xmlns.oracle.com/SOA_Training/JMS_Sync_Consume/Sync_BPELProcess1"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOA_Training/JMS_Sync_Consume/Sync_BPELProcess1"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/SOA_Training/JMS_Sync_Consume/jmsService"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer">
+
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/SOA_Training/JMS_Sync_Consume/jmsService"
+          location="../WSDLs/jmsService.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <variables>
+    <variable name="Invoke1_Sync_Consume_Message_InputVariable" messageType="ns1:Empty_msg"/>
+    <variable name="Invoke1_Sync_Consume_Message_OutputVariable" messageType="ns1:Sync_Consume_Message_msg"/>
+  </variables>
+  <sequence name="main">
+  </sequence>
+</process>

@@ -1,0 +1,41 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Wed Nov 20 15:53:44 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="DB_Poling_BPELProcess"
+               targetNamespace="http://xmlns.oracle.com/SOA_Training/DB_Poling/DB_Poling_BPELProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOA_Training/DB_Poling/DB_Poling_BPELProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/SOA_Training/DB_Poling/dbService"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer">
+
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/SOA_Training/DB_Poling/dbService"
+          location="../WSDLs/dbService.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="dbService" partnerLinkType="ns1:dbService_plt" myRole="dbService_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_receive_InputVariable" messageType="ns1:StudentCollection_msg"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" createInstance="yes" partnerLink="dbService" portType="ns1:dbService_ptt"
+             operation="receive" variable="Receive1_receive_InputVariable"/>
+  </sequence>
+</process>

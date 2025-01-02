@@ -1,0 +1,63 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']</loc>
+      <line>20</line>
+      <col/>
+      <file>BPEL/BPELProcess.bpel</file>
+      <name>BPEL/BPELProcess.bpel</name>
+      <fix>You should place all explicit &lt;bpel:import> statements in a BPEL 2.0 process.</fix>
+      <msg>There are no explicit "import" statements in &lt;bpel:process> "BPELProcess" as required by BPEL 2.0 standard.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='inputVariable']</loc>
+      <line>45</line>
+      <col/>
+      <file>BPEL/BPELProcess.bpel</file>
+      <name>BPEL/BPELProcess.bpel</name>
+      <fix>Make sure that value "client:BPELProcessRequestMessage" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "client:BPELProcessRequestMessage" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='outputVariable']</loc>
+      <line>48</line>
+      <col/>
+      <file>BPEL/BPELProcess.bpel</file>
+      <name>BPEL/BPELProcess.bpel</name>
+      <fix>Make sure that value "client:BPELProcessResponseMessage" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "client:BPELProcessResponseMessage" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='receive'][@name='receiveInput']</loc>
+      <line>61</line>
+      <col/>
+      <file>BPEL/BPELProcess.bpel</file>
+      <name>BPEL/BPELProcess.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "variable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:receive> refers to a bpel:variable (via the attribute "variable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']</loc>
+      <line>19</line>
+      <col/>
+      <file>BPEL/BPELProcess1.bpel</file>
+      <name>BPEL/BPELProcess1.bpel</name>
+      <fix>You should place all explicit &lt;bpel:import> statements in a BPEL 2.0 process.</fix>
+      <msg>There are no explicit "import" statements in &lt;bpel:process> "BPELProcess1" as required by BPEL 2.0 standard.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='receive'][@name='Receive1']</loc>
+      <line>29</line>
+      <col/>
+      <file>BPEL/BPELProcess1.bpel</file>
+      <name>BPEL/BPELProcess1.bpel</name>
+      <fix>Make sure that value "jmsService" is resolvable (check imports, value of "partnerLink").</fix>
+      <msg>"partnerLink" is set to "jmsService" on this &lt;bpel:receive> activity but it cannot be resolved (check value of "partnerLink", imports, WSDLs or XSDs).</msg>
+   </Fault>
+</Faults>

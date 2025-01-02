@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Tue Nov 12 12:25:55 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="RestApi"
+         targetNamespace="http://xmlns.oracle.com/SOA_Training/RestApi/RestApi"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/SOA_Training/RestApi/RestApi"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns1="json">
+
+    <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <partnerLinks>
+        <partnerLink name="RestService" bpelx:wadl="yes"/>
+    </partnerLinks>
+
+    <variables>
+        <!-- Input variable (JSON format) -->
+        <variable name="inputVar" bpelx:json="object" />
+        
+        <!-- Output variable (JSON format) -->
+        <variable name="outputVar" bpelx:json="string" />
+    </variables>
+
+    <sequence name="main">
+        <!-- Receive activity: Receiving JSON input -->
+        <receive name="Receive1" partnerLink="RestService" variable="inputVar" bpelx:method="Addition"
+                 createInstance="yes"/>
+        
+        <!-- Extension Activity: Using JavaScript to check EmpId -->
+        <extensionActivity>
+            <bpelx:js name="Javascript1">
+                <![CDATA[// Define the check function for EmpId 
+                    function checkEmpStatus(input) { 
+                        if (input.EmpId > 100) { 
+                            return "Emp Verified"; 
+                        } else { 
+                            return "Invalid Input"; 
+                        } 
+                    } 
+                     
+                    // Assign the result to the outputVar 
+                    process.outputVar = checkEmpStatus(process.inputVar);]]>
+            </bpelx:js>
+        </extensionActivity>
+
+        <!-- Reply activity: Sending the result back as JSON -->
+        <reply name="Reply1" partnerLink="RestService" variable="outputVar" bpelx:method="Addition"/>
+    </sequence>
+</process>

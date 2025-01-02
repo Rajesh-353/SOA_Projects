@@ -1,0 +1,63 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/WSDLs/FileAdapterBPELProcess.wsdl</file>
+      <name>/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/WSDLs/FileAdapterBPELProcess.wsdl</name>
+      <fix/>
+      <msg>Error in getting XML input stream: file:/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/Schemas/Books.xsd: C:\JDeveloper\mywork\SOA_Training\FileAdapterPractice\SOA\Schemas\Books.xsd (The system cannot find the file specified)</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/WSDLs/FileAdapterBPELProcess.wsdl</file>
+      <name>/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/WSDLs/FileAdapterBPELProcess.wsdl</name>
+      <fix/>
+      <msg>Message part "payload" is undefined [element = {http://xmlns.oracle.com/SOA_Training/FileAdapterPractice/FileAdapterBPELProcess}process</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/WSDLs/FileAdapterBPELProcess.wsdl</file>
+      <name>/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/WSDLs/FileAdapterBPELProcess.wsdl</name>
+      <fix/>
+      <msg>Message part "payload" is undefined [element = {http://xmlns.oracle.com/SOA_Training/FileAdapterPractice/FileAdapterBPELProcess}processResponse</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>file:/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/WSDLs/fileReference.wsdl</file>
+      <name>/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/WSDLs/fileReference.wsdl</name>
+      <fix/>
+      <msg>Message part "body" is undefined [element = {http://TargetNamespace.com/fileReference}Books</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:component[@name='FileAdapterBPELProcess/fileReference']</loc>
+      <line/>
+      <col/>
+      <file>C:\JDeveloper\mywork\SOA_Training\FileAdapterPractice\SOA\composite.xml</file>
+      <name>C:\JDeveloper\mywork\SOA_Training\FileAdapterPractice\SOA\composite.xml</name>
+      <fix/>
+      <msg>The service "fileReference" exposed by component "FileAdapterBPELProcess" is not wired to/used by any other component.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='Invoke1']</loc>
+      <line>64</line>
+      <col/>
+      <file>BPEL/FileAdapterBPELProcess.bpel</file>
+      <name>BPEL/FileAdapterBPELProcess.bpel</name>
+      <fix>Make sure that the attribute "partnerLink" is specified.</fix>
+      <msg>Attribute "partnerLink" is not set on this &lt;bpel:invoke> activity.</msg>
+   </Fault>
+</Faults>

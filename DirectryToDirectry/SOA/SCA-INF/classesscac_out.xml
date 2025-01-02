@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][2]</loc>
+      <line>85</line>
+      <col/>
+      <file>BPEL/MoveFile.bpel</file>
+      <name>BPEL/MoveFile.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "xsd:string" is not compatible with to-spec of "ns2:empty"</msg>
+   </Fault>
+</Faults>

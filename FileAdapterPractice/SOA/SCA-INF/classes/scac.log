@@ -1,0 +1,64 @@
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2024-12-09 11:18:31.839/1.396 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Loaded operational configuration from "jar:file:/C:/Oracle/Middleware/Oracle_Home/coherence/lib/coherence.jar!/tangosol-coherence.xml"
+2024-12-09 11:18:31.868/1.424 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Loaded operational overrides from "jar:file:/C:/Oracle/Middleware/Oracle_Home/coherence/lib/coherence.jar!/tangosol-coherence-override-dev.xml"
+2024-12-09 11:18:31.869/1.425 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "/tangosol-coherence-override.xml" is not specified
+2024-12-09 11:18:31.871/1.427 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "cache-factory-config.xml" is not specified
+2024-12-09 11:18:31.871/1.428 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "cache-factory-builder-config.xml" is not specified
+2024-12-09 11:18:31.872/1.428 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "/custom-mbeans.xml" is not specified
+
+Oracle Coherence Version 12.2.1.4.0 Build 74888
+ Grid Edition: Development mode
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+2024-12-09 11:18:32.672/2.228 Oracle Coherence GE 12.2.1.4.0 <Info> (thread=main, member=n/a): The cluster name has not been configured, a value of "Admin's cluster" has been automatically generated
+2024-12-09 11:18:32.968/2.525 Oracle Coherence GE 12.2.1.4.0 <Info> (thread=main, member=n/a): Created cache factory com.tangosol.net.ExtensibleConfigurableCacheFactory
+Dec 09, 2024 11:18:33 AM oracle.soa.scac.ValidateComposite loadWSDLs
+WARNING: Validating WSDLs from WSDLManager....  with option UseSoaInfraMds:false
+WARNING: Schema load failed due to: Error loading schema from file:/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/WSDLs/fileReference.wsdl [Cause=Error in getting XML input stream: file:/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/Schemas/Books.xsd: C:\JDeveloper\mywork\SOA_Training\FileAdapterPractice\SOA\Schemas\Books.xsd (The system cannot find the file specified)]
+oracle.fabric.common.wsdl.XSDException: Error loading schema from file:/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/WSDLs/fileReference.wsdl [Cause=Error in getting XML input stream: file:/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/Schemas/Books.xsd: C:\JDeveloper\mywork\SOA_Training\FileAdapterPractice\SOA\Schemas\Books.xsd (The system cannot find the file specified)]
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:590)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:452)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:249)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:420)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:757)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:560)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:927)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:113)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:1016)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:598)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:586)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:234)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:215)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:207)
+Caused by: oracle.fabric.common.FabricException: Error in getting XML input stream: file:/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/Schemas/Books.xsd: C:\JDeveloper\mywork\SOA_Training\FileAdapterPractice\SOA\Schemas\Books.xsd (The system cannot find the file specified)
+	at oracle.fabric.common.metadata.MetadataManagerImpl.getInputStreamFromAbsoluteURL(MetadataManagerImpl.java:374)
+	at oracle.integration.platform.common.MDSMetadataManagerImpl.getInputStreamFromAbsoluteURL(MDSMetadataManagerImpl.java:907)
+	at oracle.fabric.common.metadata.MetadataManagerImpl.getDocumentAsInputStreamUsingUrlResolver(MetadataManagerImpl.java:217)
+	at oracle.integration.platform.common.MDSMetadataManagerImpl.getDocumentAsInputStreamUsingCustomization(MDSMetadataManagerImpl.java:603)
+	at oracle.integration.platform.common.MDSMetadataManagerImpl.getDocumentAsInputStream(MDSMetadataManagerImpl.java:583)
+	at oracle.fabric.common.wsdl.SchemaBuilder.parseXMLSrc(SchemaBuilder.java:1123)
+	at oracle.fabric.common.wsdl.SchemaBuilder.parseXSDSrc(SchemaBuilder.java:1073)
+	at oracle.fabric.common.wsdl.SchemaBuilder.processSchemaImportsAndInclude(SchemaBuilder.java:882)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:586)
+	... 15 more
+Caused by: java.io.FileNotFoundException: C:\JDeveloper\mywork\SOA_Training\FileAdapterPractice\SOA\Schemas\Books.xsd (The system cannot find the file specified)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at sun.net.www.protocol.file.FileURLConnection.connect(FileURLConnection.java:90)
+	at sun.net.www.protocol.file.FileURLConnection.getInputStream(FileURLConnection.java:188)
+	at java.net.URL.openStream(URL.java:1045)
+	at oracle.fabric.common.metadata.MetadataManagerImpl.getInputStreamFromAbsoluteURL(MetadataManagerImpl.java:368)
+	... 23 more
+SEVERE: Failed to build the schema model for: http://xmlns.oracle.com/SOA_Training/FileAdapterPractice/FileAdapterBPELProcess due to XSDException: Error loading schema from file:/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/WSDLs/fileReference.wsdl [Cause=Error in getting XML input stream: file:/C:/JDeveloper/mywork/SOA_Training/FileAdapterPractice/SOA/Schemas/Books.xsd: C:\JDeveloper\mywork\SOA_Training\FileAdapterPractice\SOA\Schemas\Books.xsd (The system cannot find the file specified)]
+WARNING: Cannot resolve entity model for: http://xmlns.oracle.com/SOA_Training/FileAdapterPractice/FileAdapterBPELProcess
+WARNING: Cannot resolve entity model for: http://xmlns.oracle.com/SOA_Training/FileAdapterPractice/FileAdapterBPELProcess
+WARNING: Cannot resolve entity model for: http://TargetNamespace.com/fileReference
+WARNING: Cannot resolve entity model for: http://TargetNamespace.com/fileReference
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option PermSize=32m; support was removed in 8.0
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0

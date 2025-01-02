@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Nov 13 16:16:07 IST 2024
+  Author: Admin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="FileHandling"
+         targetNamespace="http://xmlns.oracle.com/SOA_Training/FileAdopter2/FileHandling"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/SOA_Training/FileAdopter2/FileHandling"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FileAdopter2/WriteFile"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FileAdopter2/SyncroRead"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FileAdopter2/ListFile"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns4="http://TargetNamespace.com/WriteFile">
+    
+  <!-- PARTNERLINKS -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FileAdopter2/WriteFile"
+          location="../WSDLs/WriteFile.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  
+  <partnerLinks>
+    <partnerLink name="WriteFile" partnerLinkType="ns1:Write_plt" partnerRole="Write_role"/>
+    <partnerLink name="SyncroRead" partnerLinkType="ns2:SynchRead_plt" partnerRole="SynchRead_role"/>
+    <partnerLink name="ListFile" partnerLinkType="ns3:FileListing_plt" partnerRole="FileListing_role"/>
+    <partnerLink name="filehandling_client_ep" partnerLinkType="client:FileHandling" myRole="FileHandlingProvider"/>
+  </partnerLinks>
+
+  <!-- VARIABLES -->
+  <variables>
+    <variable name="inputVariable" messageType="client:FileHandlingRequestMessage"/>
+    <variable name="Invoke1_Write_InputVariable" messageType="ns1:Write_msg"/>
+    <variable name="Invoke2_SynchRead_InputVariable" messageType="ns2:Empty_msg"/>
+    <variable name="Invoke3_FileListing_InputVariable" messageType="ns3:Empty_msg"/>
+    <variable name="replyOutput_process_OutputVariable" messageType="client:FileHandlingResponseMessage"/>
+    <variable name="replyOutput_process_OutputVariable_1" messageType="client:FileHandlingResponseMessage"/>
+    <!-- Add empty output variables -->
+    <variable name="Invoke1_Write_OutputVariable" messageType="ns1:Write_msg"/>
+    <variable name="Invoke2_SynchRead_OutputVariable" messageType="ns2:Empty_msg"/>
+    <variable name="Invoke3_FileListing_OutputVariable" messageType="ns3:Empty_msg"/>
+  </variables>
+
+  <!-- FAULT HANDLERS -->
+  <faultHandlers>
+    <catchAll>
+      <assign name="Assign2">
+        <copy>
+          <from>concat("Got some error: ", ora:getFaultAsString())</from>
+          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$replyOutput_process_OutputVariable</to>
+        </copy>
+      </assign>
+    </catchAll>
+  </faultHandlers>
+
+  <!-- ORCHESTRATION LOGIC -->
+  <sequence name="main">
+    
+    <!-- Receive input from requester -->
+    <receive name="receiveInput" variable="inputVariable" createInstance="yes" partnerLink="filehandling_client_ep"
+             portType="client:FileHandling" operation="process"/>
+    
+    <!-- Assign to WriteFile Input -->
+    <assign name="Assign1">
+      <copy>
+        <from>concat("Hello ", "File is processed successfully")</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_Write_InputVariable.body/ns4:Book</to>
+      </copy>
+    </assign>
+    
+    <!-- Invoke WriteFile service (added empty output variable) -->
+    <invoke name="Invoke1" partnerLink="WriteFile" portType="ns1:Write_ptt"
+            operation="Write" inputVariable="Invoke1_Write_InputVariable" outputVariable="Invoke1_Write_OutputVariable" bpelx:invokeAsDetail="no"/>
+    
+    <!-- Invoke SyncroRead service (added empty output variable) -->
+    <invoke name="Invoke2" partnerLink="SyncroRead" portType="ns2:SynchRead_ptt"
+            operation="SynchRead" inputVariable="Invoke2_SynchRead_InputVariable" outputVariable="Invoke2_SynchRead_OutputVariable" bpelx:invokeAsDetail="no"/>
+    
+    <!-- Invoke ListFile service (added empty output variable) -->
+    <invoke name="Invoke3" partnerLink="ListFile" portType="ns3:FileListing_ptt"
+            operation="FileListing" inputVariable="Invoke3_FileListing_InputVariable" outputVariable="Invoke3_FileListing_OutputVariable" bpelx:invokeAsDetail="no"/>
+    
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="filehandling_client_ep" portType="client:FileHandling" operation="process"
+           variable="replyOutput_process_OutputVariable_1"/>
+  </sequence>
+</process>

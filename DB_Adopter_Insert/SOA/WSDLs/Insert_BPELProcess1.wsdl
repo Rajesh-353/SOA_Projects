@@ -1,0 +1,34 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="Insert_BPELProcess1"
+     targetNamespace="http://xmlns.oracle.com/SOA_Training/DB_Adopter_Insert/Insert_BPELProcess1"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/SOA_Training/DB_Adopter_Insert/Insert_BPELProcess1"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbReference"
+    >
+    <plnk:partnerLinkType name="Insert_BPELProcess1">
+        <plnk:role name="Insert_BPELProcess1Provider" portType="client:Insert_BPELProcess1"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/SOA_Training/DB_Adopter_Insert/Insert_BPELProcess1"
+                 schemaLocation="../Schemas/Insert_BPELProcess1.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbReference" schemaLocation="../Schemas/dbReference_table.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="Insert_BPELProcess1RequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="Insert_BPELProcess1ResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="Insert_BPELProcess1">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:Insert_BPELProcess1RequestMessage"/>
+            <wsdl:output message="client:Insert_BPELProcess1ResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

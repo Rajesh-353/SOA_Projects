@@ -1,0 +1,36 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="EMPLOYEE.EMP_NAME:db_column_not_null">false</entry>
+   <entry key="STUDENT.STU_AGE:db_column_type">NUMBER</entry>
+   <entry key="STUDENT.STU_ID:db_column_not_null">true</entry>
+   <entry key="EMPLOYEE.EMP_SALARY:db_column_scale">0</entry>
+   <entry key="STUDENT.STU_NAME:db_column_size">20</entry>
+   <entry key="STUDENT:db_table_type">TABLE</entry>
+   <entry key="STUDENT.STU_AGE:db_column_precision">38</entry>
+   <entry key="STUDENT.STU_ID:db_column_precision">38</entry>
+   <entry key="STUDENT.STU_ID:db_column_type">NUMBER</entry>
+   <entry key="EMPLOYEE.EMP_NAME:db_column_type">VARCHAR2</entry>
+   <entry key="STUDENT:db_column_2">STU_AGE</entry>
+   <entry key="STUDENT:db_column_1">STU_NAME</entry>
+   <entry key="STUDENT:db_column_0">STU_ID</entry>
+   <entry key="STUDENT.STU_AGE:db_column_scale">0</entry>
+   <entry key="EMPLOYEE.EMP_ID:db_column_scale">0</entry>
+   <entry key="return_single_result_set">false</entry>
+   <entry key="STUDENT.STU_NAME:db_column_not_null">false</entry>
+   <entry key="STUDENT.STU_AGE:db_column_not_null">false</entry>
+   <entry key="EMPLOYEE.EMP_SALARY:db_column_not_null">false</entry>
+   <entry key="STUDENT.STU_ID:db_column_scale">0</entry>
+   <entry key="EMPLOYEE:db_table_type">TABLE</entry>
+   <entry key="STUDENT.STU_NAME:db_column_type">VARCHAR2</entry>
+   <entry key="EMPLOYEE.EMP_ID:db_column_type">NUMBER</entry>
+   <entry key="EMPLOYEE.EMP_NAME:db_column_size">50</entry>
+   <entry key="root_descriptor_alias">STUDENT</entry>
+   <entry key="EMPLOYEE:db_column_2">EMP_SALARY</entry>
+   <entry key="EMPLOYEE:db_column_1">EMP_NAME</entry>
+   <entry key="EMPLOYEE.EMP_ID:db_column_precision">38</entry>
+   <entry key="EMPLOYEE:db_column_0">EMP_ID</entry>
+   <entry key="EMPLOYEE.EMP_ID:db_column_not_null">true</entry>
+   <entry key="EMPLOYEE.EMP_SALARY:db_column_precision">38</entry>
+   <entry key="EMPLOYEE.EMP_SALARY:db_column_type">NUMBER</entry>
+</properties>

@@ -1,0 +1,80 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Nov 12 14:43:21 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="TransformData"
+               targetNamespace="http://xmlns.oracle.com/SOA_Training/XSLTTransf/TransformData"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOA_Training/XSLTTransf/TransformData"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/XSLTTransf/ReadService"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/XSLTTransf/WriteService"
+         xmlns:ns3="http://TargetNamespace.com/fileReference">
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/XSLTTransf/ReadService"
+          location="../WSDLs/ReadService.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="ReadService" partnerLinkType="ns1:Read_plt" myRole="Read_role"/>
+    <partnerLink name="WriteService" partnerLinkType="ns2:Write_plt" partnerRole="Write_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="receiveInput_Read_InputVariable" messageType="ns1:Read_msg"/>
+    <variable name="Invoke1_Write_InputVariable" messageType="ns2:Write_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in TransformData.wsdl) -->
+    <receive name="receiveInput" partnerLink="ReadService" portType="ns1:Read_ptt" operation="Read"
+             variable="receiveInput_Read_InputVariable" createInstance="yes"/>
+    <assign name="Transformation1">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from>ora:doXSLTransformForDoc("../Transformations/Transformation1_1.xsl", $receiveInput_Read_InputVariable.body)</from>
+        <to variable="Invoke1_Write_InputVariable" part="body"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" partnerLink="WriteService" portType="ns2:Write_ptt"
+            operation="Write" inputVariable="Invoke1_Write_InputVariable" bpelx:invokeAsDetail="no"/>
+    <!-- Generate reply to synchronous request -->
+  </sequence>
+</process>

@@ -1,0 +1,104 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<jws:workspace xmlns:jws="http://xmlns.oracle.com/ide/project">
+   <hash n="adrs-workspace-properties">
+      <value n="adrs-instance-binding" v="DefaultServer"/>
+   </hash>
+   <value n="appTemplateId" v="SOAApplicationTemplate_2"/>
+   <hash n="component-versions">
+      <value n="oracle.adf.share.dt.migration.jps.JaznCredStoreMigratorHelper" v="11.1.1.1.0"/>
+      <value n="oracle.adf.share.dt.migration.wsm.PolicyAttachmentMigratorHelper" v="12.1.2.0.0"/>
+      <value n="oracle.adfdt.controller.adfc.source.migration.SavePointDataSourceForWLSMigrator" v="11.1.1.1.0"/>
+      <value n="oracle.adfdtinternal.model.ide.security.extension.AdfSecurityMigrator" v="11.1.1.1.0.13"/>
+      <value n="oracle.ide.model.Project" v="11.1.1.1.0;12.2.1.4.0"/>
+      <value n="oracle.jbo.dt.jdevx.deployment.JbdProjectMigrator" v="11.1.2.0.0"/>
+      <value n="oracle.jdeveloper.maven.migrator.POMNodeMigrator" v="12.2.1.0.0"/>
+      <value n="oracle.jdevimpl.appresources.ApplicationSrcDirMigrator" v="11.1.2.0.0"/>
+      <value n="oracle.jdevimpl.deploy.migrators.JeeDeploymentMigrator" v="12.1.2.0.0"/>
+      <value n="oracle.jdevimpl.xml.oc4j.jps.JpsConfigMigratorHelper" v="12.1.4.0.0"/>
+      <value n="oracle.jdevimpl.xml.wl.WeblogicMigratorHelper" v="11.1.1.1.0"/>
+      <value n="oracle.mds.internal.dt.deploy.base.MarMigratorHelper" v="11.1.1.1.0"/>
+      <value n="oracle.mds.internal.dt.ide.migrator.MDSConfigMigratorHelper" v="11.1.1.0.5313"/>
+   </hash>
+   <list n="contentSets">
+      <string v="oracle.mds.internal.dt.ide.appresources.MDSAppResourceCSProvider/MDSAppContentSet"/>
+      <string v="oracle.jdeveloper.model.PathsConfiguration/ApplicationSrcContentSet"/>
+      <string v="oracle.jdeveloper.model.PathsConfiguration/ADFContentSet"/>
+      <string v="oracle.jdeveloper.model.PathsConfiguration/ApplicationBuildToolContentSet"/>
+      <string v="oracle.jdeveloper.model.PathsConfiguration/ResourceBundlesContentSet"/>
+   </list>
+   <list n="listOfChildren">
+      <hash><url n="URL" path="Assaignment_Functions/Assaignment_Functions.jpr"/></hash>
+      <hash><url n="URL" path="Assign_Activity/Assign_Activity.jpr"/></hash>
+      <hash><url n="URL" path="Calling_Target/Calling_Target.jpr"/></hash>
+      <hash><url n="URL" path="ChunkedReadFileAdoper/ChunkedReadFileAdoper.jpr"/></hash>
+      <hash><url n="URL" path="Concatination_Assainment1/Concatination_Assainment1.jpr"/></hash>
+      <hash><url n="URL" path="DB_Adopter_Insert/DB_Adopter_Insert.jpr"/></hash>
+      <hash><url n="URL" path="DB_adopter_Insert1/DB_adopter_Insert1.jpr"/></hash>
+      <hash><url n="URL" path="DB_Poling/DB_Poling.jpr"/></hash>
+      <hash><url n="URL" path="DB_SelectQuery/DB_SelectQuery.jpr"/></hash>
+      <hash><url n="URL" path="DBExecute_PureSQL/DBExecute_PureSQL.jpr"/></hash>
+      <hash><url n="URL" path="Dehydrate_Activity/Dehydrate_Activity.jpr"/></hash>
+      <hash><url n="URL" path="DeleteFileTarget/DeleteFileTarget.jpr"/></hash>
+      <hash><url n="URL" path="DesignTimeMDS/DesignTimeMDS.jpr"/></hash>
+      <hash><url n="URL" path="DirectryToDirectry/DirectryToDirectry.jpr"/></hash>
+      <hash><url n="URL" path="ExceptionHandling/ExceptionHandling.jpr"/></hash>
+      <hash><url n="URL" path="FileAdapterCombinationOFRWSr/FileAdapterCombinationOFRWSr.jpr"/></hash>
+      <hash><url n="URL" path="FIleAdopter/FIleAdopter.jpr"/></hash>
+      <hash><url n="URL" path="FTP_Adopter_Demo/FTP_Adopter_Demo.jpr"/></hash>
+      <hash><url n="URL" path="Inline_Subprocess/Inline_Subprocess.jpr"/></hash>
+      <hash><url n="URL" path="JMS_Adopter_Consume/JMS_Adopter_Consume.jpr"/></hash>
+      <hash><url n="URL" path="JMS_Adopter_Produ/JMS_Adopter_Produ.jpr"/></hash>
+      <hash><url n="URL" path="JMS_Produce_Topic/JMS_Produce_Topic.jpr"/></hash>
+      <hash><url n="URL" path="JMS_Topic_Produce/JMS_Topic_Produce.jpr"/></hash>
+      <hash><url n="URL" path="JS_Try_Catch/JS_Try_Catch.jpr"/></hash>
+      <hash><url n="URL" path="MDS_Schema/MDS_Schema.jpr"/></hash>
+      <hash><url n="URL" path="PickAcitivity/PickAcitivity.jpr"/></hash>
+      <hash><url n="URL" path="ReadAndWriteFile/ReadAndWriteFile.jpr"/></hash>
+      <hash><url n="URL" path="RestApi/RestApi.jpr"/></hash>
+      <hash><url n="URL" path="StandAloneSubProcess/StandAloneSubProcess.jpr"/></hash>
+      <hash><url n="URL" path="TargetService/TargetService.jpr"/></hash>
+      <hash><url n="URL" path="WSDL_Calculator/WSDL_Calculator.jpr"/></hash>
+      <hash><url n="URL" path="XA_DB_Insert/XA_DB_Insert.jpr"/></hash>
+      <hash><url n="URL" path="XMLTo_JSON/XMLTo_JSON.jpr"/></hash>
+      <hash><url n="URL" path="XSLTTransf/XSLTTransf.jpr"/></hash>
+   </list>
+   <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
+      <hash n="profileDefinitions">
+         <hash n="designtimemdsapplicationleveldeployement">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="false"/>
+            </hash>
+            <url n="jarURL" path="deploy/designtimemdsapplicationleveldeployement.zip"/>
+            <value n="profileClass" v="oracle.tip.tools.ide.fabric.deploy.sarb.SarBundleProfile"/>
+            <value n="profileName" v="designtimemdsapplicationleveldeployement"/>
+         </hash>
+         <hash n="sarbundle1">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="false"/>
+            </hash>
+            <url n="jarURL" path="deploy/designtimemdsapplicationleveldeployement.zip"/>
+            <value n="profileClass" v="oracle.tip.tools.ide.fabric.deploy.sarb.SarBundleProfile"/>
+            <value n="profileName" v="sarbundle1"/>
+         </hash>
+      </hash>
+      <list n="profileList">
+         <string v="designtimemdsapplicationleveldeployement"/>
+         <string v="sarbundle1"/>
+      </list>
+   </hash>
+   <hash n="oracle.jdeveloper.maven.compiler.MavenConfiguration">
+      <hash n="oracle.jdeveloper.maven.compiler.MavenConfiguration">
+         <value n="defaultExecuteRadioButtonSelected" v="true"/>
+      </hash>
+   </hash>
+   <hash n="oracle.jdeveloper.model.PathsConfiguration">
+      <hash n="ApplicationSrcContentSet">
+         <list n="pattern-filters">
+            <string v="+**"/>
+         </list>
+         <list n="url-path">
+            <url path="src/"/>
+         </list>
+      </hash>
+   </hash>
+</jws:workspace>

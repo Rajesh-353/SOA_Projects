@@ -1,0 +1,115 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Dec 12 10:53:12 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="FileAdapterBPELProcess"
+               targetNamespace="http://xmlns.oracle.com/SOA_Training/FileAdapterCombinationOFRWSr/FileAdapterBPELProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOA_Training/FileAdapterCombinationOFRWSr/FileAdapterBPELProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FileAdapterCombinationOFRWSr/ListfileReference"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FileAdapterCombinationOFRWSr/WritefileReference"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/file/SOA_Training/FileAdapterCombinationOFRWSr/SyncReadfileReference"
+         xmlns:ns4="http://TargetNamespace.com/WriteFile"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/SOA_Training/FileAdapterCombinationOFRWSr/FileAdapterBPELProcess" location="../WSDLs/FileAdapterBPELProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="fileadapterbpelprocess_client" partnerLinkType="client:FileAdapterBPELProcess" myRole="FileAdapterBPELProcessProvider"/>
+    <partnerLink name="ListfileReference" partnerLinkType="ns1:FileListing_plt" partnerRole="FileListing_role"/>
+    <partnerLink name="WritefileReference" partnerLinkType="ns2:Write_plt" partnerRole="Write_role"/>
+    <partnerLink name="SyncReadfileReference" partnerLinkType="ns3:SynchRead_plt" partnerRole="SynchRead_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:FileAdapterBPELProcessRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:FileAdapterBPELProcessResponseMessage"/>
+    <variable name="Invoke1_Write_InputVariable" messageType="ns2:Write_msg"/>
+    <variable name="Invoke2_SynchRead_InputVariable" messageType="ns3:Empty_msg"/>
+    <variable name="Invoke2_SynchRead_OutputVariable" messageType="ns3:SynchRead_msg"/>
+    <variable name="Invoke3_FileListing_InputVariable" messageType="ns1:Empty_msg"/>
+    <variable name="Invoke3_FileListing_OutputVariable" messageType="ns1:FileListing_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in FileAdapterBPELProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="fileadapterbpelprocess_client" portType="client:FileAdapterBPELProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from>$inputVariable.payload/client:bookName</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_Write_InputVariable.body/ns4:Book/ns4:C1</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:bookAuthor</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_Write_InputVariable.body/ns4:Book/ns4:C2</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:bookPrice</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_Write_InputVariable.body/ns4:Book/ns4:C3</to>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" partnerLink="WritefileReference" portType="ns2:Write_ptt"
+            operation="Write" inputVariable="Invoke1_Write_InputVariable" bpelx:invokeAsDetail="no"/>
+    <invoke name="Invoke2" partnerLink="SyncReadfileReference" portType="ns3:SynchRead_ptt"
+            operation="SynchRead" inputVariable="Invoke2_SynchRead_InputVariable"
+            outputVariable="Invoke2_SynchRead_OutputVariable" bpelx:invokeAsDetail="no"/>
+    <invoke name="Invoke3" partnerLink="ListfileReference" portType="ns1:FileListing_ptt"
+            operation="FileListing" inputVariable="Invoke3_FileListing_InputVariable"
+            outputVariable="Invoke3_FileListing_OutputVariable" bpelx:invokeAsDetail="no"/>
+    <assign name="Assign2">
+      <copy>
+        <from>"File Processed successfully"</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:result</to>
+      </copy>
+    </assign>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="fileadapterbpelprocess_client" portType="client:FileAdapterBPELProcess" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

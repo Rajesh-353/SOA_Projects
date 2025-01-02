@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+
+  Created: Wed Nov 13 12:33:03 IST 2024
+  Author: Admin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="HandleExceptionWithJS"
+         targetNamespace="http://xmlns.oracle.com/SOA_Training/JS_Try_Catch/HandleExceptionWithJS"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/SOA_Training/JS_Try_Catch/HandleExceptionWithJS"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+    
+    <!-- PARTNER LINKS -->
+    <partnerLinks>
+        <partnerLink name="RestService" bpelx:wadl="yes"/>
+    </partnerLinks>
+
+    <!-- VARIABLES -->
+    <variables>
+        <!-- Input variable (JSON format) -->
+        <variable name="inputVar" bpelx:json="object" />
+        
+        <!-- Output variable (JSON format) -->
+        <variable name="outputVar" bpelx:json="string" />
+    </variables>
+
+    <!-- ORCHESTRATION LOGIC -->
+    <sequence>
+
+        <!-- Receive the request and input data from the client service -->
+        <receive name="receiveInput" partnerLink="RestService"
+                 variable="inputVar" createInstance="yes" bpelx:method="handleException"/>
+
+        <!-- JavaScript extension to validate the input data -->
+        <extensionActivity>
+            <bpelx:js name="Javascript1">
+                <![CDATA[
+                function validateInput(input) {
+                    try {
+                        // Validate EmpId - it should be a number
+                        if (typeof input.EmpId !== 'number' || isNaN(input.EmpId)) {
+                            throw new Error('Invalid EmpId. EmpId should be an integer.');
+                        }
+
+                        // Validate Name - it should be a string
+                        if (typeof input.Name !== 'string') {
+                            throw new Error('Invalid Name. Name should be a string.');
+                        }
+
+                        // If validation passes, return the correct response
+                        return {
+                            status: 'success',
+                            message: 'Valid input',
+                            data: input
+                        };
+
+                    } catch (e) {
+                        // Handle the exception and return the error message
+                        return {
+                            status: 'error',
+                            message: e.message
+                        };
+                    }
+                }
+
+                // Calling the function and storing the result in outputVar
+                // Ensure that process.inputVar is correctly passed to the function
+                process.outputVar = validateInput(process.inputVar);
+                ]]>
+            </bpelx:js>
+        </extensionActivity>
+
+        <!-- Generate reply to synchronous request -->
+        <reply name="replyOutput" partnerLink="RestService"
+               variable="outputVar" bpelx:method="handleException"/>
+
+    </sequence>
+
+</process>

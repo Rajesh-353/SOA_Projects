@@ -1,0 +1,87 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Nov 25 16:05:49 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="Insert_BPELProcess1"
+               targetNamespace="http://xmlns.oracle.com/SOA_Training/XA_DB_Insert/Insert_BPELProcess1"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOA_Training/XA_DB_Insert/Insert_BPELProcess1"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/SOA_Training/XA_DB_Insert/dbReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbReference">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/SOA_Training/XA_DB_Insert/Insert_BPELProcess1" location="../WSDLs/Insert_BPELProcess1.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="insert_bpelprocess1_client" partnerLinkType="client:Insert_BPELProcess1" myRole="Insert_BPELProcess1Provider"/>
+    <partnerLink name="dbReference" partnerLinkType="ns1:dbReference_plt" partnerRole="dbReference_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:Insert_BPELProcess1RequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:Insert_BPELProcess1ResponseMessage"/>
+    <variable name="Invoke1_merge_InputVariable" messageType="ns1:EmployeeCollection_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in Insert_BPELProcess1.wsdl) -->
+    <receive name="receiveInput" partnerLink="insert_bpelprocess1_client" portType="client:Insert_BPELProcess1" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from>$inputVariable.payload/client:EmployeeCollection/client:employee/client:emp_Id</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_merge_InputVariable.EmployeeCollection/ns2:Employee/ns2:empId</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:EmployeeCollection/client:employee/client:emp_Name</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_merge_InputVariable.EmployeeCollection/ns2:Employee/ns2:empName</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:EmployeeCollection/client:employee/client:emp_Salary</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_merge_InputVariable.EmployeeCollection/ns2:Employee/ns2:empSalary</to>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" partnerLink="dbReference" portType="ns1:dbReference_ptt"
+            operation="merge" inputVariable="Invoke1_merge_InputVariable" bpelx:invokeAsDetail="no"/>
+    <throw name="Throw1" faultName="bpelx:bindingFault"/>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="insert_bpelprocess1_client" portType="client:Insert_BPELProcess1" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

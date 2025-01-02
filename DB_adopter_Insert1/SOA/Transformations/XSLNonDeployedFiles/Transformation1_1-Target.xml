@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<tns:EmployeeCollection xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/SOA_Training/DB_adopter_Insert1/dbReference" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbReference">
+   <tns:Employee>
+      <tns:empId>40</tns:empId>
+      <tns:empName>emp_Name41</tns:empName>
+      <tns:empSalary>42</tns:empSalary>
+   </tns:Employee>
+   <tns:Employee>
+      <tns:empId>43</tns:empId>
+      <tns:empName>emp_Name44</tns:empName>
+      <tns:empSalary>45</tns:empSalary>
+   </tns:Employee>
+   <tns:Employee>
+      <tns:empId>46</tns:empId>
+      <tns:empName>emp_Name47</tns:empName>
+      <tns:empSalary>48</tns:empSalary>
+   </tns:Employee>
+</tns:EmployeeCollection>

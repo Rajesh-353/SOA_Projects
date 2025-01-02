@@ -1,0 +1,32 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="Handling_Catch"
+     targetNamespace="http://xmlns.oracle.com/SOA_Training/ExceptionHandling/Handling_Catch"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/SOA_Training/ExceptionHandling/Handling_Catch"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns1="http://schemas.oracle.com/bpel/extension"
+    >
+    <plnk:partnerLinkType name="Handling_Catch">
+        <plnk:role name="Handling_CatchProvider" portType="client:Handling_Catch"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://schemas.oracle.com/bpel/extension" location="RuntimeFault.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/SOA_Training/ExceptionHandling/Handling_Catch"
+                 schemaLocation="../Schemas/Handling_Catch.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="Handling_CatchRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="Handling_CatchResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="Handling_Catch">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:Handling_CatchRequestMessage"/>
+            <wsdl:output message="client:Handling_CatchResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

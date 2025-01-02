@@ -1,0 +1,107 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Nov 27 12:03:51 IST 2024
+  Author:  Admin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="InsertBPELProcess1"
+               targetNamespace="http://xmlns.oracle.com/SOA_Training/Dehydrate_Activity/InsertBPELProcess1"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOA_Training/Dehydrate_Activity/InsertBPELProcess1"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/SOA_Training/Dehydrate_Activity/InsertReference"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/SOA_Training/Dehydrate_Activity/deleteReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/top/InsertReference"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/deleteReference">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/SOA_Training/Dehydrate_Activity/InsertBPELProcess1" location="../WSDLs/InsertBPELProcess1.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="insertbpelprocess1_client" partnerLinkType="client:InsertBPELProcess1" myRole="InsertBPELProcess1Provider"/>
+    <partnerLink name="InsertReference" partnerLinkType="ns1:InsertReference_plt" partnerRole="InsertReference_role"/>
+    <partnerLink name="deleteReference" partnerLinkType="ns2:deleteReference_plt" partnerRole="deleteReference_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:InsertBPELProcess1RequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:InsertBPELProcess1ResponseMessage"/>
+    <variable name="Invoke1_merge_InputVariable" messageType="ns1:EmployeeCollection_msg"/>
+    <variable name="Invoke2_delete_InputVariable" messageType="ns2:EmployeeCollection_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in InsertBPELProcess1.wsdl) -->
+    <receive name="receiveInput" partnerLink="insertbpelprocess1_client" portType="client:InsertBPELProcess1" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from>$inputVariable.payload/client:EmployeeCollection/client:employee/client:emp_Id</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_merge_InputVariable.EmployeeCollection/ns3:Employee/ns3:empId</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:Delete_emp_Id</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke2_delete_InputVariable.EmployeeCollection/ns4:Employee/ns4:empId</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:Delete_emp_name</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke2_delete_InputVariable.EmployeeCollection/ns4:Employee/ns4:empName</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:EmployeeCollection/client:employee/client:emp_Name</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_merge_InputVariable.EmployeeCollection/ns3:Employee/ns3:empName</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:EmployeeCollection/client:employee/client:emp_Salary</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_merge_InputVariable.EmployeeCollection/ns3:Employee/ns3:empSalary</to>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" partnerLink="InsertReference" portType="ns1:InsertReference_ptt"
+            operation="merge" inputVariable="Invoke1_merge_InputVariable" bpelx:invokeAsDetail="no"/>
+    <extensionActivity>
+      <bpelx:dehydrate name="Dehydrate1"/>
+    </extensionActivity>
+    <invoke name="Invoke2" partnerLink="deleteReference" portType="ns2:deleteReference_ptt"
+            operation="delete" inputVariable="Invoke2_delete_InputVariable" bpelx:invokeAsDetail="no"/>
+    <extensionActivity>
+      <bpelx:dehydrate name="Dehydrate2"/>
+    </extensionActivity>
+    <throw name="Throw1" faultName="bpelx:bindingFault"/>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="insertbpelprocess1_client" portType="client:InsertBPELProcess1" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

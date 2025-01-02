@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Books xmlns="http://TargetNamespace.com/fileReference">
+   <BooksCollection>
+      <Title>Title1</Title>
+      <Author>Author2</Author>
+      <Price>Price3</Price>
+   </BooksCollection>
+   <BooksCollection>
+      <Title>Title4</Title>
+      <Author>Author5</Author>
+      <Price>Price6</Price>
+   </BooksCollection>
+   <BooksCollection>
+      <Title>Title7</Title>
+      <Author>Author8</Author>
+      <Price>Price9</Price>
+   </BooksCollection>
+</Books>

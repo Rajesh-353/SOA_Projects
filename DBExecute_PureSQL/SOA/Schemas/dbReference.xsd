@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/dbReference" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/dbReference" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="dbReferenceInput" type="dbReferenceInput"/>
+   <xs:complexType name="dbReferenceInput">
+      <xs:sequence>
+         <xs:element name="emp_Id" type="xs:decimal" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="dbReferenceOutputCollection" type="dbReferenceOutputCollection"/>
+   <xs:complexType name="dbReferenceOutputCollection">
+      <xs:sequence>
+         <xs:element name="dbReferenceOutput" type="dbReferenceOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="dbReferenceOutput">
+      <xs:sequence>
+         <xs:element name="emp_Id" type="xs:decimal" nillable="true"/>
+         <xs:element name="emp_Name" type="xs:string" nillable="true"/>
+         <xs:element name="emp_Salary" type="xs:decimal" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

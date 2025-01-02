@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://xmlns.oracle.com/SOA_Training/Dehydrate_Activity/InsertBPELProcess1"
+	xmlns="http://www.w3.org/2001/XMLSchema">
+	<element name="process">
+        <complexType>
+            <sequence>
+                <element name="EmployeeCollection">
+                    <complexType>
+                        <sequence>
+                            <element name="employee" maxOccurs="unbounded">
+                                <complexType>
+                                    <sequence>
+                                        <!-- Employee ID (emp) changed to int -->
+                                        <element name="emp_Id" type="int"/>
+                                        <!-- Employee Name (name) stays as string -->
+                                        <element name="emp_Name" type="string"/>
+                                        <!-- Employee Salary (salary) changed to int -->
+                                        <element name="emp_Salary" type="int"/>
+                                    </sequence>
+                                </complexType>
+                            </element>
+                        </sequence>
+                    </complexType>
+                </element>
+                 <element name="Delete_emp_Id" type="int"/>
+                <element name="Delete_emp_name" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <!-- Response Element -->
+    <element name="processResponse">
+        <complexType>
+            <sequence>
+                <element name="EmployeeCollection">
+                    <complexType>
+                        <sequence>
+                            <element name="employee" maxOccurs="unbounded">
+                                <complexType>
+                                    <sequence>
+                                        <!-- Employee ID (emp) changed to int -->
+                                        <element name="emp_Id" type="int"/>
+                                        <!-- Employee Name (name) stays as string -->
+                                        <element name="emp_Name" type="string"/>
+                                        <!-- Employee Salary (salary) changed to int -->
+                                        <element name="emp_Salary" type="int"/>
+                                    </sequence>
+                                </complexType>
+                            </element>
+                        </sequence>
+                    </complexType>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+</schema>
